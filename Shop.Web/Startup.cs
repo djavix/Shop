@@ -29,9 +29,15 @@ namespace Shop.Web
             //para hacer la inyeccion de la base de datos.
             services.AddDbContext<DataContext>(cfg =>
             {
-                cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
+                cfg.UseSqlServer(this.Configuration.GetConnectionString("WorkConnection"));
             });
 
+            //Ciclo de vida muy corto
+            services.AddTransient<SeedDb>();
+
+            //Inyeccion de la interfaz IRepository indicando que la implementacion es la clase Repository
+            //Ciclo de vida permanente
+            services.AddScoped<IRepository, Repository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
