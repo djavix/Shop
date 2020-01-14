@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Shop.Web.Data.Entities;
 
 namespace Shop.Web.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DbSet<Product> Produtcs { get; set; }
+        public DbSet<Country> Countries { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
