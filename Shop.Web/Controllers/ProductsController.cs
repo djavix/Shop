@@ -67,17 +67,20 @@ namespace Shop.Web.Controllers
                     if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\images\\Products"))
                         Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\wwwroot\\images\\Products");
 
+                    var guid = Guid.NewGuid().ToString();
+                    var file = $"{guid}.jpg";
+
                     path = Path.Combine(
                         Directory.GetCurrentDirectory(), 
                         "wwwroot\\images\\Products", 
-                        view.ImageFile.FileName);
+                        file);
 
-                    using (var stream = new FileStream(path, FileMode.CreateNew))
+                    using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await view.ImageFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Products/{view.ImageFile.FileName}";
+                    path = $"~/images/Products/{file}";
                 }
 
 
@@ -160,17 +163,20 @@ namespace Shop.Web.Controllers
                         if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\images\\Products"))
                             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\wwwroot\\images\\Products");
 
+                        var guid = Guid.NewGuid().ToString();
+                        var file = $"{guid}.jpg";
+
                         path = Path.Combine(
                             Directory.GetCurrentDirectory(),
                             "wwwroot\\images\\Products",
-                            view.ImageFile.FileName);
+                            file);
 
-                        using (var stream = new FileStream(path, FileMode.CreateNew))
+                        using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await view.ImageFile.CopyToAsync(stream);
                         }
 
-                        path = $"~/images/Products/{view.ImageFile.FileName}";
+                        path = $"~/images/Products/{file}";
                     }
 
                     //TODO: Cambiar cuando se implemente el login de la pagina.
