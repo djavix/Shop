@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Shop.Web.Data;
 using Shop.Web.Data.Entities;
+using Shop.Web.Data.Repositories;
 using Shop.Web.Helpers;
 using System.Text;
 
@@ -65,6 +66,7 @@ namespace Shop.Web
             //Ciclo de vida permanente
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUserHelper, UserHelper>();
 
             services.Configure<CookiePolicyOptions>(options =>
