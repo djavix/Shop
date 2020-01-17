@@ -85,9 +85,7 @@ namespace Shop.Web.Controllers
                     path = $"~/images/Products/{file}";
                 }
 
-
-                //TODO: Cambiar cuando se implemente el login de la pagina.
-                view.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                view.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 var product = this.ToProduct(view, path);
                 await this.repository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
@@ -181,8 +179,7 @@ namespace Shop.Web.Controllers
                         path = $"~/images/Products/{file}";
                     }
 
-                    //TODO: Cambiar cuando se implemente el login de la pagina.
-                    view.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                    view.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     var product = this.ToProduct(view, path);
                     await this.repository.UpdateAsync(product);
                 }
