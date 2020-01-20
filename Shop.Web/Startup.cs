@@ -59,7 +59,7 @@ namespace Shop.Web
             //para hacer la inyeccion de la base de datos.
             services.AddDbContext<DataContext>(cfg =>
             {
-                cfg.UseSqlServer(this.Configuration.GetConnectionString("WorkConnection"));
+                cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
             //Ciclo de vida muy corto
