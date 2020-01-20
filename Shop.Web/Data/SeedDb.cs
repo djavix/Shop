@@ -2,6 +2,7 @@
 using Shop.Web.Data.Entities;
 using Shop.Web.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,6 +28,23 @@ namespace Shop.Web.Data
             await this.userHelper.CheckRoleAsync("Admin");
             await this.userHelper.CheckRoleAsync("Customer");
 
+            if (!this._context.Countries.Any())
+            {
+                var cities = new List<City>();
+                cities.Add(new City { Name = "Caracas" });
+                cities.Add(new City { Name = "Pto. La Cruz" });
+                cities.Add(new City { Name = "Barquisimeto" });
+
+                this._context.Countries.Add(new Country
+                {
+                    Cities = cities,
+                    Name = "Venezuela"
+                });
+
+                await this._context.SaveChangesAsync();
+            }
+
+
             var user = await this.userHelper.GetUserByEmailAsync("djavix.17@gmail.com");
             if (user == null)
             {
@@ -36,7 +54,11 @@ namespace Shop.Web.Data
                     LastName = "Velasquez",
                     Email = "djavix.17@gmail.com",
                     UserName = "djavix.17@gmail.com",
-                    PhoneNumber = "+584242851004"
+                    PhoneNumber = "+584242851004",
+                    Address = "El Paraiso.",
+                    CityId = this._context.Countries.FirstOrDefault().Cities.FirstOrDefault().Id,
+                    City = this._context.Countries.FirstOrDefault().Cities.FirstOrDefault()
+
                 };
                 var result = await this.userHelper.AddUserAsync(user, "Abc123456");
                 if (result != IdentityResult.Success)
