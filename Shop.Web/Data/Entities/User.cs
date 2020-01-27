@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shop.Web.Data.Entities
 {
     public class User : IdentityUser
     {
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Display(Name = "Phone Number")]
+        public override string PhoneNumber { get => base.PhoneNumber; set => base.PhoneNumber = value; }
+
 
         [Display(Name = "Full Name")]
         public string FullName => $"{this.FirstName} {this.LastName}";
@@ -18,6 +25,15 @@ namespace Shop.Web.Data.Entities
         public int CityId { get; set; }
 
         public City City { get; set; }
+
+        [Display(Name = "Email Confirmed")]
+        public override bool EmailConfirmed { get => base.EmailConfirmed; set => base.EmailConfirmed = value; }
+
+
+        [NotMapped]
+        [Display(Name = "Is Admin?")]
+        public bool IsAdmin { get; set; }
+
 
     }
 }

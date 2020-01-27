@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Shop.Web.Data.Entities;
 using Shop.Web.Models;
 using System;
@@ -109,6 +110,26 @@ namespace Shop.Web.Helpers
 		{
 			return await this.userManager.ResetPasswordAsync(user, token, password);
 		}
+
+		public async Task<List<User>> GetAllUsersAsync()
+		{
+			return await this.userManager.Users
+				.Include(u => u.City)
+				.OrderBy(u => u.FirstName)
+				.ThenBy(u => u.LastName)
+				.ToListAsync();
+		}
+
+		public async Task RemoveUserFromRoleAsync(User user, string roleName)
+		{
+			await this.userManager.RemoveFromRoleAsync(user, roleName);
+		}
+
+		public async Task DeleteUserAsync(User user)
+		{
+			await this.userManager.DeleteAsync(user);
+		}
+
 
 
 

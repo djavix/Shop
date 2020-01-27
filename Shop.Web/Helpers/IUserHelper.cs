@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Shop.Web.Data.Entities;
 using Shop.Web.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Shop.Web.Helpers
@@ -36,6 +37,13 @@ namespace Shop.Web.Helpers
         Task<string> GeneratePasswordResetTokenAsync(User user);
 
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string password);
+
+        Task<List<User>> GetAllUsersAsync();
+
+        Task RemoveUserFromRoleAsync(User user, string roleName);
+
+        Task DeleteUserAsync(User user);
+
 
     }
 }

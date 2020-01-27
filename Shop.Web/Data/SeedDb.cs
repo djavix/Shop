@@ -32,8 +32,8 @@ namespace Shop.Web.Data
                 await this.AddCountriesAndCitiesAsync();
             }
 
-            await this.CheckUserAsync("brad@gmail.com", "Brad", "Pit", "Customer");
-            await this.CheckUserAsync("angelina@gmail.com", "Angelina", "Jolie", "Customer");
+            //await this.CheckUserAsync("brad@gmail.com", "Brad", "Pit", "Customer");
+            //await this.CheckUserAsync("angelina@gmail.com", "Angelina", "Jolie", "Customer");
             var user = await this.CheckUserAsync("djavix.17@gmail.com", "Javier", "Velasquez", "Admin");
 
             // Add products
@@ -84,7 +84,7 @@ namespace Shop.Web.Data
                 Email = userName,
                 UserName = userName,
                 Address = "El Paraiso",
-                PhoneNumber = "+584242851004",
+                PhoneNumber = "04242851004",
                 CityId = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault().Id,
                 City = this.context.Countries.FirstOrDefault().Cities.FirstOrDefault()
             };
