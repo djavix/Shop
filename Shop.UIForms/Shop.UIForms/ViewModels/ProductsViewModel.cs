@@ -2,6 +2,7 @@
 using Shop.Common.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Shop.UIForms.ViewModels
@@ -31,7 +32,7 @@ namespace Shop.UIForms.ViewModels
             this.LoadProducts();
         }
 
-        private async void LoadProducts()
+        private  async Task LoadProducts()
         {
             this.IsRefreshing = true;
 

@@ -1,6 +1,7 @@
 ﻿using Shop.Common.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Shop.UIForms.ViewModels
 {
@@ -50,6 +51,7 @@ namespace Shop.UIForms.ViewModels
                 PageName = m.PageName,
                 Title = m.Title
             }).ToList());
+
         }
 
 

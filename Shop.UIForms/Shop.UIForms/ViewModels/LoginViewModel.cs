@@ -3,6 +3,7 @@ using Shop.Common.Models;
 using Shop.Common.Services;
 using Shop.UIForms.Views;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -42,6 +43,7 @@ namespace Shop.UIForms.ViewModels
 
         private async void Login()
         {
+
             if (string.IsNullOrEmpty(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "You must enter an email.", "Accept");
