@@ -2,6 +2,7 @@
 using Shop.Common.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -32,7 +33,7 @@ namespace Shop.UIForms.ViewModels
             this.LoadProducts();
         }
 
-        private  async Task LoadProducts()
+        private  async void LoadProducts()
         {
             this.IsRefreshing = true;
 
@@ -44,7 +45,7 @@ namespace Shop.UIForms.ViewModels
                 "bearer",
                 MainViewModel.GetInstance().Token.Token);
 
-
+            this.IsRefreshing = false;
 
             if (!response.IsSuccess)
             {
@@ -52,13 +53,12 @@ namespace Shop.UIForms.ViewModels
                     "Error",
                     response.Message,
                     "Accept");
-                this.IsRefreshing = false;
                 return;
             }
 
             var products = (List<Product>)response.Result;
-            this.Products = new ObservableCollection<Product>(products);
-            this.IsRefreshing = false;
+            this.Products = new ObservableCollection<Product>(products.OrderBy(p => p.Name));
+
         }
 
     }

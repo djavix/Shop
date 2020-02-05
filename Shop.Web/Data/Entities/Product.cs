@@ -41,7 +41,7 @@ namespace Shop.Web.Data.Entities
                     return null;
 
                 //TODO: Cambiar ruta por la verdadera ruta en azure.
-                return $"ruta{this.ImageUrl.Substring(1)}";
+                return $"https://shopjavicurso.azurewebsites.net{this.ImageUrl.Substring(1)}";
             }
         }
     }
