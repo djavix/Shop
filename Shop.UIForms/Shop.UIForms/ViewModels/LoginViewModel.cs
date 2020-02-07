@@ -1,9 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
+using Shop.Common.Helpers;
 using Shop.Common.Models;
 using Shop.Common.Services;
+using Shop.UIForms.Helpers;
 using Shop.UIForms.Views;
-using System;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -29,6 +30,7 @@ namespace Shop.UIForms.ViewModels
 
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool IsRemember { get; set; }
 
         public ICommand LoginCommand => new RelayCommand(Login);
 
@@ -36,8 +38,7 @@ namespace Shop.UIForms.ViewModels
         {
             this.apiService = new ApiService();
             this.IsEnabled = true;
-            this.Email = "djavix.17@gmail.com";
-            this.Password = "Abc123456";
+            this.IsRemember = true;
         }
 
 
@@ -46,13 +47,13 @@ namespace Shop.UIForms.ViewModels
 
             if (string.IsNullOrEmpty(this.Email))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You must enter an email.", "Accept");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.EmailError, Languages.Accept);
                 return;
             }
 
             if (string.IsNullOrEmpty(this.Password))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You must enter a password.", "Accept");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.PasswordError, Languages.Accept);
                 return;
             }
 
@@ -77,7 +78,7 @@ namespace Shop.UIForms.ViewModels
 
             if (!response.IsSuccess)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Email or password incorrect.", "Accept");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.LoginError, Languages.Accept);
                 return;
             }
 
@@ -87,6 +88,13 @@ namespace Shop.UIForms.ViewModels
             mainViewModel.Products = new ProductsViewModel();
             mainViewModel.UserEmail = this.Email;
             mainViewModel.UserPassword = this.Password;
+
+            Settings.IsRemember = this.IsRemember;
+            Settings.UserEmail = this.Email;
+            Settings.UserPassword = this.Password;
+            Settings.Token = JsonConvert.SerializeObject(token);
+
+
             Application.Current.MainPage = new MasterPage();
 
         }
